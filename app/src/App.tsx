@@ -16,7 +16,7 @@ function App() {
         try {
             // initialize connection
             const connection = new HubConnectionBuilder()
-                .withUrl('http://localhost:5214')
+                .withUrl('http://localhost:5214/chat')
                 .configureLogging(LogLevel.Information)
                 .build()
             // set up handler
@@ -43,7 +43,7 @@ function App() {
                             </h1>
                         </Col>
                     </Row>
-                    {/* <WaitingRoom></WaitingRoom> */}
+                    <WaitingRoom joinChatRoom={joinChatRoom}></WaitingRoom>
                 </Container>
             </main>
         </div>

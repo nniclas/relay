@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Relay.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,18 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("reactApp", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000/")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+    
+});
 
 var app = builder.Build();
 
@@ -25,5 +38,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapHub<ChatHub>("/Chat");
+
+app.UseCors("reactApp");
 
 app.Run();
