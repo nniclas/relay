@@ -2,9 +2,11 @@ import React from 'react'
 import { useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { MessageContainer } from './message-container'
+import { SendMessageForm } from './send-message-form'
 
 interface ChatRoomArgs {
     messages: any[]
+    sendMessage: (message: string) => void
 }
 
 export const ChatRoom = (a: ChatRoomArgs) => {
@@ -19,6 +21,9 @@ export const ChatRoom = (a: ChatRoomArgs) => {
             <Row>
                 <Col sm={12}>
                     <MessageContainer messages={a.messages} />
+                </Col>
+                <Col sm={12}>
+                    <SendMessageForm sendMessage={a.sendMessage} />
                 </Col>
             </Row>
         </div>
