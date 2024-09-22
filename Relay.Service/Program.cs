@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Relay.Service;
+using Relay.Service.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,13 +15,15 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("reactApp", builder =>
     {
-        builder.WithOrigins("http://localhost:3000/")
+        builder.WithOrigins("http://localhost:3000")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
     });
     
 });
+
+builder.Services.AddSingleton<SharedDb>();
 
 var app = builder.Build();
 

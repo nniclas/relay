@@ -8,9 +8,11 @@ import {
     HubConnectionBuilder,
     LogLevel,
 } from '@microsoft/signalr'
+import { ChatRoom } from './components/chat-room'
 
 function App() {
-    const [connection, setConnection] = useState<HubConnection>()
+    const [conn, setConnection] = useState<HubConnection>()
+    const [messages, setMessages] = useState<any[]>([])
 
     const joinChatRoom = async (username: string, chatroom: string) => {
         try {
@@ -19,10 +21,18 @@ function App() {
                 .withUrl('http://localhost:5214/chat')
                 .configureLogging(LogLevel.Information)
                 .build()
+
             // set up handler
-            connection.on('JoinChatRoom', (username, message) => {
-                console.log('msg: ', message)
+            connection.on('ReceiveMessage', (username, message) => {
+                setMessages((messages) => [...messages, { username, message }])
             })
+
+            connection.on('ReceiveSpecificMessage', (username, message) => {
+                setMessages((messages) => [...messages, { username, message }])
+
+                console.log(message)
+            })
+
             await connection.start()
             await connection.invoke('JoinChatRoom', { username, chatroom })
 
@@ -43,7 +53,11 @@ function App() {
                             </h1>
                         </Col>
                     </Row>
-                    <WaitingRoom joinChatRoom={joinChatRoom}></WaitingRoom>
+                    {!conn ? (
+                        <WaitingRoom joinChatRoom={joinChatRoom} />
+                    ) : (
+                        <ChatRoom messages={messages} />
+                    )}
                 </Container>
             </main>
         </div>
