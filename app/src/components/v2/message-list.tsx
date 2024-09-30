@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Message } from '../../types/message'
+
+import { AnimatePresence, motion } from 'framer-motion'
+import { MessageItem } from './message-item'
 
 interface MessageListArgs {
     // messages: Message[]
@@ -8,6 +11,35 @@ interface MessageListArgs {
 }
 
 export const MessageList = (a: MessageListArgs) => {
+    return (
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 4,
+            }}
+        >
+            {a.messages.map((m, i) => {
+                return <MessageItem message={m} key={i} />
+            })}
+        </div>
+    )
+
+    return (
+        <motion.div
+            layout
+            layoutId={'list'}
+            className='list-container'
+            style={{ display: 'flex', flexDirection: 'column', width: 200 }}
+        >
+            <AnimatePresence mode='sync'>
+                {a.messages.map((m, i) => {
+                    return <MessageItem message={m} key={i} />
+                })}
+            </AnimatePresence>
+        </motion.div>
+    )
+
     return (
         <ul role='list' className='divide-y divide-gray-100'>
             {a.messages.map((m) => (

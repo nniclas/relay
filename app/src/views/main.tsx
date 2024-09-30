@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Col, Container, Row } from 'react-bootstrap'
 import { WaitingRoom } from '../components/v1/waiting-room'
@@ -13,6 +13,9 @@ import { MessageList } from '../components/v2/message-list'
 export const Main = () => {
     const [conn, setConnection] = useState<HubConnection>()
     const [messages, setMessages] = useState<any[]>([])
+
+    const count = useRef(0)
+    const [items, setItems] = useState([0])
 
     const joinChatRoom = async (username: string, chatroom: string) => {
         try {
@@ -51,13 +54,18 @@ export const Main = () => {
     }
 
     return (
-        <Container>
-            <MessageList messages={people} />
+        <Container
+            onClick={() => {
+                count.current++
+                setItems([...items, count.current])
+            }}
+        >
+            <MessageList messages={items} />
         </Container>
     )
 }
 
-const people = [
+const testPeople = [
     {
         name: 'Leslie Alexander',
         email: 'leslie.alexander@example.com',
@@ -94,6 +102,14 @@ const people = [
         lastSeenDateTime: '2023-01-23T13:23Z',
     },
     {
+        name: 'Tom Cook',
+        email: 'tom.cook@example.com',
+        role: 'Director of Product',
+        imageUrl:
+            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        lastSeen: null,
+    },
+    {
         name: 'Courtney Henry',
         email: 'courtney.henry@example.com',
         role: 'Designer',
@@ -101,13 +117,5 @@ const people = [
             'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
         lastSeen: '3h ago',
         lastSeenDateTime: '2023-01-23T13:23Z',
-    },
-    {
-        name: 'Tom Cook',
-        email: 'tom.cook@example.com',
-        role: 'Director of Product',
-        imageUrl:
-            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        lastSeen: null,
     },
 ]
