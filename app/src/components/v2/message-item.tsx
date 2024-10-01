@@ -15,13 +15,14 @@ export const MessageItem = (a: MessageArgs) => {
     return (
         <motion.div
             style={{
-                height: msgHeight,
-                minHeight: msgHeight,
                 display: 'flex',
+                width: 600,
                 // justifyContent: 'center',
                 alignItems: 'center',
-                borderRadius: msgHeight,
+                borderRadius: 16,
                 background: a.color,
+
+                margin: `8px 0 0 ${a.message.out ? 36 : 0}px`,
             }}
             initial={{ y: -msgHeight * 2, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -32,7 +33,7 @@ export const MessageItem = (a: MessageArgs) => {
                     flex: 1,
                     fontFamily: 'Afacad Flux',
                     fontSize: 16,
-                    padding: '0 24px',
+                    padding: '12px 24px',
                     color: 'rgba(0,0,0,0.5)',
                 }}
             >

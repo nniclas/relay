@@ -11,6 +11,8 @@ import { ChatRoom } from '../components/v1/chat-room'
 import { MessageList } from '../components/v2/message-list'
 import { Message } from '../types/message'
 
+const you = 'tom.cook@example.com'
+
 export const Main = () => {
     // const [conn, setConnection] = useState<HubConnection>()
     // const [messages, setMessages] = useState<any[]>([])
@@ -73,61 +75,63 @@ const testMessages: (Message & { color: string })[] = [
     {
         user: 'leslie.alexander@example.com',
         date: '2023-01-23T13:23Z',
-        text: 'Lorem ipsum',
+        text: 'tukiya mejipisi waruwe mejilawe wa tukiruwewapo bona siliwarumewetu',
         color: 'rgb(200,220,200)',
     },
     {
         user: 'michael.foster@example.com',
         date: '2023-01-23T13:23Z',
-        text: 'Dolor sit amet fucsi boblox',
+        text: 'niwelila jisi mejilawe tukiwe tubofeweru bona powafijipo wohujimepowepo naboru wani warumobohuruya, fekiweruweboni tukiweruwe kiwaniba wa tukibohusiwanipo wohulilamewerusi, wameme sikijiwemeposi bona mojibakituya mowen',
         color: 'rgb(220,220,200)',
     },
     {
         user: 'dries.vincent@example.com',
         date: '2023-01-23T13:23Z',
-        text: 'Business Relations',
+        text: 'tukiya mebolilasi',
         color: 'rgb(220,200,220)',
     },
     {
         user: 'lindsay.walton@example.com',
         date: '2023-01-23T13:23Z',
-        text: 'Front-end Developer',
+        text: 'waruwe mejilawe wa pijiweliwe bona wa pibomowe',
         color: 'rgb(220,220,220)',
     },
     {
         user: 'tom.cook@example.com',
         date: '2023-01-23T13:23Z',
-        text: 'Director of Product',
+        text: 'fekiweruweboni',
         color: 'rgb(200,200,220)',
+        out: true,
     },
     {
         user: 'courtney.henry@example.com',
         date: '2023-01-23T13:23Z',
-        text: 'Designer',
+        text: 'tuwemopimewesi waruwe mejilawe wa pijiweliwe bona wa pibomowe-baruwaniwatuwe fejitukijini tukiya mebolilasi',
         color: 'rgb(220,200,200)',
     },
     {
         user: 'tom.cook@example.com',
         date: '2023-01-23T13:23Z',
-        text: 'Director of Product',
+        text: 'pijiweliwe bona wa pibomowe',
         color: 'rgb(200,200,220)',
+        out: true,
     },
     {
         user: 'dries.vincent@example.com',
         date: '2023-01-23T13:23Z',
-        text: 'Business Relations',
+        text: 'wa',
         color: 'rgb(220,200,220)',
     },
     {
         user: 'leslie.alexander@example.com',
         date: '2023-01-23T13:23Z',
-        text: 'Lorem ipsum',
+        text: 'tuwemopimewesi waruwe mejilawe wa pijiweliwe',
         color: 'rgb(200,220,200)',
     },
     {
         user: 'courtney.henry@example.com',
         date: '2023-01-23T13:23Z',
-        text: 'Designer',
+        text: 'mejilawe wa pijiweliwe',
         color: 'rgb(220,200,200)',
     },
 ]

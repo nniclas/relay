@@ -20,8 +20,8 @@ export const MessageList = (a: MessageListArgs) => {
         <div
             ref={container}
             style={{
-                display: 'flex',
-                flexDirection: 'column',
+                // display: 'flex',
+                // flexDirection: 'column',
                 gap: 8,
                 height: 400,
                 overflowY: 'scroll',
