@@ -9,113 +9,180 @@ import {
 } from '@microsoft/signalr'
 import { ChatRoom } from '../components/v1/chat-room'
 import { MessageList } from '../components/v2/message-list'
+import { Message } from '../types/message'
 
 export const Main = () => {
-    const [conn, setConnection] = useState<HubConnection>()
-    const [messages, setMessages] = useState<any[]>([])
+    // const [conn, setConnection] = useState<HubConnection>()
+    // const [messages, setMessages] = useState<any[]>([])
 
-    const count = useRef(0)
-    const [items, setItems] = useState([0])
+    // const count = useRef(0)
+    const [messages, setMessages] = useState<(Message & { color: string })[]>(
+        []
+    )
 
-    const joinChatRoom = async (username: string, chatroom: string) => {
-        try {
-            // initialize connection
-            const connection = new HubConnectionBuilder()
-                .withUrl('http://localhost:5214/chat')
-                .configureLogging(LogLevel.Information)
-                .build()
+    // const joinChatRoom = async (username: string, chatroom: string) => {
+    //     try {
+    //         // initialize connection
+    //         const connection = new HubConnectionBuilder()
+    //             .withUrl('http://localhost:5214/chat')
+    //             .configureLogging(LogLevel.Information)
+    //             .build()
 
-            // set up handler
-            connection.on('ReceiveMessage', (username, message) => {
-                setMessages((messages) => [...messages, { username, message }])
-            })
+    //         // set up handler
+    //         connection.on('ReceiveMessage', (username, message) => {
+    //             setMessages((messages) => [...messages, { username, message }])
+    //         })
 
-            connection.on('ReceiveSpecificMessage', (username, message) => {
-                setMessages((messages) => [...messages, { username, message }])
+    //         connection.on('ReceiveSpecificMessage', (username, message) => {
+    //             setMessages((messages) => [...messages, { username, message }])
 
-                console.log(message)
-            })
+    //             console.log(message)
+    //         })
 
-            await connection.start()
-            await connection.invoke('JoinChatRoom', { username, chatroom })
+    //         await connection.start()
+    //         await connection.invoke('JoinChatRoom', { username, chatroom })
 
-            setConnection(connection)
-        } catch (e) {
-            console.error(e)
-        }
-    }
+    //         setConnection(connection)
+    //     } catch (e) {
+    //         console.error(e)
+    //     }
+    // }
 
-    const sendMessage = async (message: string) => {
-        try {
-            await conn?.invoke('SendMessage', message)
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const sendMessage = async (message: string) => {
+    //     try {
+    //         await conn?.invoke('SendMessage', message)
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
 
     return (
         <Container
             onClick={() => {
-                count.current++
-                setItems([...items, count.current])
+                const i = Math.round(Math.random() * 9)
+                console.log(i)
+                setMessages([...messages, testMessages[i]])
             }}
         >
-            <MessageList messages={items} />
+            <MessageList messages={messages} />
         </Container>
     )
 }
 
-const testPeople = [
+const testMessages: (Message & { color: string })[] = [
     {
-        name: 'Leslie Alexander',
-        email: 'leslie.alexander@example.com',
-        role: 'Co-Founder / CEO',
-        imageUrl:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        lastSeen: '3h ago',
-        lastSeenDateTime: '2023-01-23T13:23Z',
+        user: 'leslie.alexander@example.com',
+        date: '2023-01-23T13:23Z',
+        text: 'Lorem ipsum',
+        color: 'rgb(200,220,200)',
     },
     {
-        name: 'Michael Foster',
-        email: 'michael.foster@example.com',
-        role: 'Co-Founder / CTO',
-        imageUrl:
-            'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        lastSeen: '3h ago',
-        lastSeenDateTime: '2023-01-23T13:23Z',
+        user: 'michael.foster@example.com',
+        date: '2023-01-23T13:23Z',
+        text: 'Dolor sit amet fucsi boblox',
+        color: 'rgb(220,220,200)',
     },
     {
-        name: 'Dries Vincent',
-        email: 'dries.vincent@example.com',
-        role: 'Business Relations',
-        imageUrl:
-            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        lastSeen: null,
+        user: 'dries.vincent@example.com',
+        date: '2023-01-23T13:23Z',
+        text: 'Business Relations',
+        color: 'rgb(220,200,220)',
     },
     {
-        name: 'Lindsay Walton',
-        email: 'lindsay.walton@example.com',
-        role: 'Front-end Developer',
-        imageUrl:
-            'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        lastSeen: '3h ago',
-        lastSeenDateTime: '2023-01-23T13:23Z',
+        user: 'lindsay.walton@example.com',
+        date: '2023-01-23T13:23Z',
+        text: 'Front-end Developer',
+        color: 'rgb(220,220,220)',
     },
     {
-        name: 'Tom Cook',
-        email: 'tom.cook@example.com',
-        role: 'Director of Product',
-        imageUrl:
-            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        lastSeen: null,
+        user: 'tom.cook@example.com',
+        date: '2023-01-23T13:23Z',
+        text: 'Director of Product',
+        color: 'rgb(200,200,220)',
     },
     {
-        name: 'Courtney Henry',
-        email: 'courtney.henry@example.com',
-        role: 'Designer',
-        imageUrl:
-            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        lastSeen: '3h ago',
-        lastSeenDateTime: '2023-01-23T13:23Z',
+        user: 'courtney.henry@example.com',
+        date: '2023-01-23T13:23Z',
+        text: 'Designer',
+        color: 'rgb(220,200,200)',
+    },
+    {
+        user: 'tom.cook@example.com',
+        date: '2023-01-23T13:23Z',
+        text: 'Director of Product',
+        color: 'rgb(200,200,220)',
+    },
+    {
+        user: 'dries.vincent@example.com',
+        date: '2023-01-23T13:23Z',
+        text: 'Business Relations',
+        color: 'rgb(220,200,220)',
+    },
+    {
+        user: 'leslie.alexander@example.com',
+        date: '2023-01-23T13:23Z',
+        text: 'Lorem ipsum',
+        color: 'rgb(200,220,200)',
+    },
+    {
+        user: 'courtney.henry@example.com',
+        date: '2023-01-23T13:23Z',
+        text: 'Designer',
+        color: 'rgb(220,200,200)',
     },
 ]
+
+// const testMessages:Message[] = [
+//     {
+//         user: 'leslie.alexander@example.com',
+//         date: '2023-01-23T13:23Z',
+//         text: 'leslie.alexander@example.com',
+//         imageUrl:
+//             'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//         lastSeen: '3h ago',
+
+//     },
+//     {
+//         name: 'Michael Foster',
+//         email: 'michael.foster@example.com',
+//         role: 'Co-Founder / CTO',
+//         imageUrl:
+//             'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//         lastSeen: '3h ago',
+//         lastSeenDateTime: '2023-01-23T13:23Z',
+//     },
+//     {
+//         name: 'Dries Vincent',
+//         email: 'dries.vincent@example.com',
+//         role: 'Business Relations',
+//         imageUrl:
+//             'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//         lastSeen: null,
+//     },
+//     {
+//         name: 'Lindsay Walton',
+//         email: 'lindsay.walton@example.com',
+//         role: 'Front-end Developer',
+//         imageUrl:
+//             'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//         lastSeen: '3h ago',
+//         lastSeenDateTime: '2023-01-23T13:23Z',
+//     },
+//     {
+//         name: 'Tom Cook',
+//         email: 'tom.cook@example.com',
+//         role: 'Director of Product',
+//         imageUrl:
+//             'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//         lastSeen: null,
+//     },
+//     {
+//         name: 'Courtney Henry',
+//         email: 'courtney.henry@example.com',
+//         role: 'Designer',
+//         imageUrl:
+//             'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//         lastSeen: '3h ago',
+//         lastSeenDateTime: '2023-01-23T13:23Z',
+//     },
+// ]

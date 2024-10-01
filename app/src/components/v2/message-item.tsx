@@ -5,38 +5,39 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 interface MessageArgs {
     message: Message
+    color: string
     // sendMessage: (message: string) => void
 }
+
+const msgHeight = 48
 
 export const MessageItem = (a: MessageArgs) => {
     return (
         <motion.div
             style={{
-                height: 64,
-                width: 256,
+                height: msgHeight,
+                minHeight: msgHeight,
                 display: 'flex',
-                overflow: 'hidden',
-
-                // background: 'rgba(0,0,0,0.2)',
+                // justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: msgHeight,
+                background: a.color,
             }}
-            initial={{ y: -64, opacity: 0 }}
+            initial={{ y: -msgHeight * 2, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ opacity: 0 }}
         >
-            <motion.div
+            <div
                 style={{
-                    display: 'flex',
                     flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    background: 'rgba(0,40,0,0.2)',
+                    fontFamily: 'Afacad Flux',
+                    fontSize: 16,
+                    padding: '0 24px',
+                    color: 'rgba(0,0,0,0.5)',
                 }}
-                initial={{ x: -256 }}
-                animate={{ x: [-256, -128, 0] }}
-                exit={{ x: -256 }}
             >
-                <div style={{ flex: 1 }}>Test {a.message.text}</div>
-            </motion.div>
+                {a.message.text}
+            </div>
         </motion.div>
     )
 }
