@@ -62,8 +62,8 @@ export const Main = () => {
         <Container
             onClick={() => {
                 const i = Math.round(Math.random() * 9)
-                console.log(i)
-                setMessages([...messages, testMessages[i]])
+                const msgs = [...messages, testMessages[i]]
+                setMessages(msgs)
             }}
         >
             <MessageList messages={messages} />

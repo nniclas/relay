@@ -14,7 +14,18 @@ export const MessageList = (a: MessageListArgs) => {
     useEffect(() => {
         const scroller = container.current!
         scroller?.scrollTo({ top: scroller.scrollHeight, behavior: 'smooth' })
+
+        // !only updates dom, keeping only the latest top messages in scroller
+        setTimeout(() => {
+            const firstChild = scroller.getElementsByTagName('div')[0]
+            if (scroller.childNodes.length > 10) {
+                scroller.removeChild(firstChild)
+                console.log(a.messages.length)
+            }
+        }, 250)
     }, [a])
+
+    // const lastMessages = a.messages.slice(Math.max(a.messages.length - 5, 0))
 
     return (
         <div
