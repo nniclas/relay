@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useRef } from 'react'
 import { useState } from 'react'
 import { Message } from '../../types/message'
 import { MessageItem } from './message-item'
+import { ScrollLayout } from './layout/scroll-layout'
 
 interface MessageListArgs {
     // messages: Message[]
@@ -12,14 +13,13 @@ export const MessageList = (a: MessageListArgs) => {
     const container = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        const scroller = container.current!
-        scroller?.scrollTo({ top: scroller.scrollHeight, behavior: 'smooth' })
-
+        const c = container.current!
+        // scroller?.scrollTo({ top: scroller.scrollHeight, behavior: 'smooth' })
         // !only updates dom, keeping only the latest top messages in scroller
         setTimeout(() => {
-            const firstChild = scroller.getElementsByTagName('div')[0]
-            if (scroller.childNodes.length > 10) {
-                scroller.removeChild(firstChild)
+            const firstChild = c.getElementsByTagName('div')[0]
+            if (c.childNodes.length > 8) {
+                c.removeChild(firstChild)
                 console.log(a.messages.length)
             }
         }, 250)
@@ -34,8 +34,8 @@ export const MessageList = (a: MessageListArgs) => {
                 // display: 'flex',
                 // flexDirection: 'column',
                 gap: 8,
-                height: 400,
-                overflowY: 'scroll',
+                // height: 400,
+                // overflowY: 'scroll',
                 padding: 32,
             }}
         >
@@ -59,50 +59,52 @@ export const MessageList = (a: MessageListArgs) => {
     //         </AnimatePresence>
     //     </motion.div>
     // )
-
-    // return (
-    //     <ul role='list' className='divide-y divide-gray-100'>
-    //         {a.messages.map((m) => (
-    //             <li key={m.email} className='flex justify-between gap-x-6 py-5'>
-    //                 <div className='flex min-w-0 gap-x-4'>
-    //                     <img
-    //                         alt=''
-    //                         src={m.imageUrl}
-    //                         className='h-12 w-12 flex-none rounded-full bg-gray-50'
-    //                     />
-    //                     <div className='min-w-0 flex-auto'>
-    //                         <p className='text-sm font-semibold leading-6 text-gray-900'>
-    //                             {m.name}
-    //                         </p>
-    //                         <p className='mt-1 truncate text-xs leading-5 text-gray-500'>
-    //                             {m.email}
-    //                         </p>
-    //                     </div>
-    //                 </div>
-    //                 <div className='hidden shrink-0 sm:flex sm:flex-col sm:items-end'>
-    //                     <p className='text-sm leading-6 text-gray-900'>
-    //                         {m.role}
-    //                     </p>
-    //                     {m.lastSeen ? (
-    //                         <p className='mt-1 text-xs leading-5 text-gray-500'>
-    //                             Last seen{' '}
-    //                             <time dateTime={m.lastSeenDateTime}>
-    //                                 {m.lastSeen}
-    //                             </time>
-    //                         </p>
-    //                     ) : (
-    //                         <div className='mt-1 flex items-center gap-x-1.5'>
-    //                             <div className='flex-none rounded-full bg-emerald-500/20 p-1'>
-    //                                 <div className='h-1.5 w-1.5 rounded-full bg-emerald-500' />
-    //                             </div>
-    //                             <p className='text-xs leading-5 text-gray-500'>
-    //                                 Online
-    //                             </p>
-    //                         </div>
-    //                     )}
-    //                 </div>
-    //             </li>
-    //         ))}
-    //     </ul>
-    //)
 }
+
+const content1 = (
+    <div>
+        Bacon ipsum dolor amet brisket ribeye pork shoulder doner beef cow
+        bresaola ham hock capicola kevin pig. Pork loin rump capicola, fatback
+        spare ribs prosciutto leberkas. Biltong drumstick sausage swine pig.
+        Drumstick spare ribs meatball shoulder venison frankfurter, landjaeger
+        kevin swine pork chicken. Ribeye cupim tongue, doner drumstick jowl
+        meatloaf pork. Shoulder beef t-bone landjaeger ground round biltong.
+        Pork belly spare ribs fatback venison. Pork loin jerky rump tail corned
+        beef shankle tri-tip fatback picanha flank bacon sausage porchetta
+        sirloin. Kevin turkey pastrami beef ribs, ribeye burgdoggen boudin
+        capicola jerky salami shank. Corned beef turkey turducken strip steak.
+        Fatback drumstick ham, doner jerky landjaeger flank shank turducken
+        strip steak sausage filet mignon ball tip ham hock. Biltong frankfurter
+        corned beef, jowl picanha chicken shank pork loin jerky. Turkey spare
+        ribs biltong doner, short loin brisket boudin alcatra tri-tip pork ball
+        tip. Salami pork chop cow ribeye, corned beef meatloaf spare ribs t-bone
+        shoulder. Swine ham hock strip steak, drumstick rump shoulder pork
+        chicken pork chop salami short loin beef ribs alcatra hamburger. Jowl
+        doner tri-tip cow ham meatloaf prosciutto landjaeger ground round pork
+        belly turkey venison. Tri-tip brisket filet mignon tongue. Sausage flank
+        sirloin drumstick. Porchetta picanha frankfurter chuck, short loin pork
+        belly jerky pork loin beef ribs prosciutto ball tip rump tail pig. Ham
+        hock bresaola shoulder leberkas. Drumstick pork belly shank burgdoggen.
+        Swine kielbasa beef ribs, brisket meatloaf shankle spare ribs. Alcatra
+        shankle rump, ham hock tri-tip pancetta chuck andouille prosciutto pork
+        loin short loin kevin. Jowl ham hock short ribs chicken. Tenderloin
+        landjaeger strip steak, brisket doner pork belly ham hock. Sirloin rump
+        pork loin pig, tail pork chop burgdoggen turkey ball tip short ribs
+        prosciutto ham tri-tip pork porchetta. Jerky strip steak shoulder,
+        fatback biltong pig bresaola tenderloin corned beef boudin ribeye beef.
+    </div>
+)
+
+const content2 = (
+    <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore natus
+        quisquam, dignissimos assumenda ratione magnam impedit quod delectus,
+        voluptatum odio neque cupiditate rem porro blanditiis maxime doloribus
+        quibusdam. Quam, officiis? Labore natus quisquam, dignissimos assumenda
+        ratione magnam impedit quod delectus, voluptatum odio neque cupiditate
+        rem porro blanditiis maxime doloribus quibusdam. Quam, officiis? Labore
+        natus quisquam, dignissimos assumenda ratione magnam impedit quod
+        delectus, voluptatum odio neque cupiditate rem porro blanditiis maxime
+        doloribus quibusdam. Quam, officiis?
+    </div>
+)

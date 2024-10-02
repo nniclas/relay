@@ -10,6 +10,7 @@ import {
 import { ChatRoom } from '../components/v1/chat-room'
 import { MessageList } from '../components/v2/message-list'
 import { Message } from '../types/message'
+import { ScrollLayout } from '../components/v2/layout/scroll-layout'
 
 const you = 'tom.cook@example.com'
 
@@ -59,15 +60,19 @@ export const Main = () => {
     // }
 
     return (
-        <Container
+        <div
             onClick={() => {
                 const i = Math.round(Math.random() * 9)
                 const msgs = [...messages, testMessages[i]]
                 setMessages(msgs)
             }}
         >
-            <MessageList messages={messages} />
-        </Container>
+            <ScrollLayout
+                content={<MessageList messages={messages} />}
+                footer={content2}
+                followEnd
+            />
+        </div>
     )
 }
 
@@ -190,3 +195,17 @@ const testMessages: (Message & { color: string })[] = [
 //         lastSeenDateTime: '2023-01-23T13:23Z',
 //     },
 // ]
+
+const content2 = (
+    <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore natus
+        quisquam, dignissimos assumenda ratione magnam impedit quod delectus,
+        voluptatum odio neque cupiditate rem porro blanditiis maxime doloribus
+        quibusdam. Quam, officiis? Labore natus quisquam, dignissimos assumenda
+        ratione magnam impedit quod delectus, voluptatum odio neque cupiditate
+        rem porro blanditiis maxime doloribus quibusdam. Quam, officiis? Labore
+        natus quisquam, dignissimos assumenda ratione magnam impedit quod
+        delectus, voluptatum odio neque cupiditate rem porro blanditiis maxime
+        doloribus quibusdam. Quam, officiis?
+    </div>
+)

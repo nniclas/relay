@@ -1,0 +1,26 @@
+.container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* FF */
+}
+
+.content {
+    background: rgba(0, 50, 0, 0.2);
+}
+
+.scrollcontent {
+    background: rgba(50, 0, 0, 0.2);
+    flex-grow: 1;
+    overflow: auto;
+    min-height: 0; /* FF */
+}
