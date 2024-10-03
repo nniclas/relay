@@ -5,15 +5,16 @@
 }
 
 .useritem {
-    width: 300px;
+    /* width: 300px; */
+    width: 100vw;
     height: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(10, 15, 20, 0.6);
     font-family: 'Afacad Flux';
     font-size: 16;
     padding: '12px 24px 32px 24px';
     color: rgba(255, 255, 255, 0.5);
-    border-right: 1.5px solid rgba(255, 255, 255, 0.2);
+    /* border-right: 1.5px solid rgba(255, 255, 255, 0.2); */
 }
