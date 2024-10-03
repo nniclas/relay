@@ -35,7 +35,7 @@ export const MessageItem = (a: MessageArgs) => {
                     fontFamily: 'Afacad Flux',
                     fontSize: 16,
                     padding: '12px 24px 32px 24px',
-                    color: 'rgba(0,0,0,0.5)',
+                    color: 'rgba(0,0,0,0.6)',
                 }}
             >
                 {a.message.text}
@@ -47,7 +47,7 @@ export const MessageItem = (a: MessageArgs) => {
                     bottom: 0,
                     fontFamily: 'Afacad Flux',
                     fontSize: 12,
-                    color: 'rgba(0,0,0,0.3)',
+                    color: 'rgba(0,0,0,0.4)',
                     padding: '6px 16px',
                 }}
             >
@@ -60,7 +60,7 @@ export const MessageItem = (a: MessageArgs) => {
                     bottom: 0,
                     fontFamily: 'Afacad Flux',
                     fontSize: 12,
-                    color: 'rgba(0,0,0,0.3)',
+                    color: 'rgba(0,0,0,0.4)',
                     padding: '6px 16px',
                 }}
             >

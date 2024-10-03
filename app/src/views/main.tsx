@@ -11,6 +11,8 @@ import { ChatRoom } from '../components/v1/chat-room'
 import { MessageList } from '../components/v2/message-list'
 import { Message } from '../types/message'
 import { ScrollLayout } from '../components/v2/layout/scroll-layout'
+import styles from './main.module.css'
+import { Slider } from '../components/v2/layout/slider'
 
 const you = 'tom.cook@example.com'
 
@@ -59,85 +61,109 @@ export const Main = () => {
     //     }
     // }
 
+    const userItems = (
+        <Slider
+            items={testUsers.map((u, i) => (
+                <div key={i} className={styles.useritem}>
+                    {u.name.split('@')[0]}
+                </div>
+            ))}
+        />
+    )
+
     return (
         <div
+            className={styles.container}
             onClick={() => {
                 const i = Math.round(Math.random() * 9)
                 const msgs = [...messages, testMessages[i]]
                 setMessages(msgs)
             }}
         >
-            <ScrollLayout
-                content={<MessageList messages={messages} />}
-                footer={content2}
-                followEnd
-            />
+            <ScrollLayout footer={userItems} followEnd>
+                <MessageList messages={messages} />
+            </ScrollLayout>
         </div>
     )
 }
+
+const testUsers: { name: string }[] = [
+    {
+        name: 'leslie.alexander@example.com',
+    },
+    {
+        name: 'michael.foster@example.com',
+    },
+    {
+        name: 'dries.vincent@example.com',
+    },
+    {
+        name: 'tom.cook@example.com',
+    },
+]
 
 const testMessages: (Message & { color: string })[] = [
     {
         user: 'leslie.alexander@example.com',
         date: '2023-01-23T13:23Z',
         text: 'tukiya mejipisi waruwe mejilawe wa tukiruwewapo bona siliwarumewetu',
-        color: 'rgb(200,220,200)',
+        color: 'rgb(100,120,100)',
     },
     {
         user: 'michael.foster@example.com',
         date: '2023-01-23T13:23Z',
         text: 'niwelila jisi mejilawe tukiwe tubofeweru bona powafijipo wohujimepowepo naboru wani warumobohuruya, fekiweruweboni tukiweruwe kiwaniba wa tukibohusiwanipo wohulilamewerusi, wameme sikijiwemeposi bona mojibakituya mowen',
-        color: 'rgb(220,220,200)',
+        color: 'rgb(120,120,100)',
     },
     {
         user: 'dries.vincent@example.com',
         date: '2023-01-23T13:23Z',
         text: 'tukiya mebolilasi',
-        color: 'rgb(220,200,220)',
+        color: 'rgb(120,100,120)',
     },
     {
         user: 'lindsay.walton@example.com',
         date: '2023-01-23T13:23Z',
         text: 'waruwe mejilawe wa pijiweliwe bona wa pibomowe',
-        color: 'rgb(220,220,220)',
+        color: 'rgb(120,120,120)',
     },
     {
         user: 'tom.cook@example.com',
         date: '2023-01-23T13:23Z',
         text: 'fekiweruweboni',
-        color: 'rgb(200,200,220)',
+        color: 'rgb(100,100,120)',
         out: true,
     },
     {
         user: 'courtney.henry@example.com',
         date: '2023-01-23T13:23Z',
         text: 'tuwemopimewesi waruwe mejilawe wa pijiweliwe bona wa pibomowe-baruwaniwatuwe fejitukijini tukiya mebolilasi',
-        color: 'rgb(220,200,200)',
+        color: 'rgb(120,100,100)',
     },
     {
         user: 'tom.cook@example.com',
         date: '2023-01-23T13:23Z',
         text: 'pijiweliwe bona wa pibomowe',
-        color: 'rgb(200,200,220)',
+        color: 'rgb(100,100,120)',
         out: true,
     },
     {
         user: 'dries.vincent@example.com',
         date: '2023-01-23T13:23Z',
         text: 'wa',
-        color: 'rgb(220,200,220)',
+        color: 'rgb(120,100,120)',
     },
     {
         user: 'leslie.alexander@example.com',
         date: '2023-01-23T13:23Z',
         text: 'tuwemopimewesi waruwe mejilawe wa pijiweliwe',
-        color: 'rgb(200,220,200)',
+        color: 'rgb(100,120,100)',
     },
     {
         user: 'courtney.henry@example.com',
         date: '2023-01-23T13:23Z',
         text: 'mejilawe wa pijiweliwe',
-        color: 'rgb(220,200,200)',
+        color: 'rgb(120,100,100)',
     },
 ]
 
@@ -195,17 +221,3 @@ const testMessages: (Message & { color: string })[] = [
 //         lastSeenDateTime: '2023-01-23T13:23Z',
 //     },
 // ]
-
-const content2 = (
-    <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore natus
-        quisquam, dignissimos assumenda ratione magnam impedit quod delectus,
-        voluptatum odio neque cupiditate rem porro blanditiis maxime doloribus
-        quibusdam. Quam, officiis? Labore natus quisquam, dignissimos assumenda
-        ratione magnam impedit quod delectus, voluptatum odio neque cupiditate
-        rem porro blanditiis maxime doloribus quibusdam. Quam, officiis? Labore
-        natus quisquam, dignissimos assumenda ratione magnam impedit quod
-        delectus, voluptatum odio neque cupiditate rem porro blanditiis maxime
-        doloribus quibusdam. Quam, officiis?
-    </div>
-)

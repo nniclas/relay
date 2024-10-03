@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styles from './scroll-layout.module.css'
 
 interface Args {
-    content: ReactNode
+    children: ReactNode
     header?: ReactNode
     footer?: ReactNode
 
@@ -28,7 +28,7 @@ export const ScrollLayout = (a: Args) => {
             <div className={styles.section}>
                 <div className={styles.content}>{a.header}</div>
                 <div ref={scrollcontainer} className={styles.scrollcontent}>
-                    {a.content}
+                    {a.children}
                 </div>
                 <div className={styles.content}>{a.footer}</div>
             </div>

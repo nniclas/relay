@@ -15,11 +15,11 @@
 }
 
 .content {
-    background: rgba(0, 50, 0, 0.2);
+    /* background: rgba(0, 50, 0, 0.2); */
 }
 
 .scrollcontent {
-    background: rgba(50, 0, 0, 0.2);
+    /* background: rgba(50, 0, 0, 0.2); */
     flex-grow: 1;
     overflow: auto;
     min-height: 0; /* FF */
