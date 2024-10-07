@@ -22,10 +22,31 @@ export const Main = () => {
     // const [conn, setConnection] = useState<HubConnection>()
     // const [messages, setMessages] = useState<any[]>([])
 
+    const [sideOpen, setSideOpen] = useState<boolean>(true)
+    const [footerOpen, setFooterOpen] = useState<boolean>(true)
+
     // const count = useRef(0)
     const [messages, setMessages] = useState<(Message & { color: string })[]>(
         []
     )
+
+    useEffect(() => {
+        setTimeout(() => {
+            setSideOpen(false)
+        }, 1000)
+
+        setTimeout(() => {
+            setSideOpen(true)
+        }, 2000)
+
+        setTimeout(() => {
+            setFooterOpen(false)
+        }, 3000)
+
+        setTimeout(() => {
+            setFooterOpen(true)
+        }, 4000)
+    }, [])
 
     // const joinChatRoom = async (username: string, chatroom: string) => {
     //     try {
@@ -63,26 +84,38 @@ export const Main = () => {
     //     }
     // }
 
-    const userItems = (
-        <Slider
-            items={testUsers.map((u, i) => (
-                <div key={i} className={styles.useritem}>
-                    {u.name.split('@')[0]}
-                </div>
-            ))}
-        />
+    // const userItems = (
+    //     <Slider
+    //         items={testUsers.map((u, i) => (
+    //             <div key={i} className={styles.useritem}>
+    //                 {u.name.split('@')[0]}
+    //             </div>
+    //         ))}
+    //     />
+    // )
+
+    const testHeader = (
+        <div style={{ height: 64, background: 'orange' }}>HEADER</div>
     )
 
-    const testFooter = <div style={{ height: 128, background: 'orange' }}></div>
+    const testMain = (
+        <div style={{ flex: 1, background: 'lightgreen' }}>MAIN</div>
+    )
 
-    const testSide = <div style={{ width: 64, background: 'red' }}></div>
+    const testSide = (
+        <div style={{ flex: 1, width: 64, background: 'red' }}>SIDE</div>
+    )
+
+    const testFooter = <div style={{ flex: 1, background: 'teal' }}>FOOTER</div>
 
     return (
         <Layout
-            header={<div />}
-            main={<div />}
-            side={<div />}
-            footer={<div />}
+            header={testHeader}
+            main={testMain}
+            side={testSide}
+            footer={testFooter}
+            sideOpen={sideOpen}
+            footerOpen={footerOpen}
         />
     )
 

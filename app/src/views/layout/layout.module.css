@@ -19,26 +19,35 @@
 }
 
 .main {
+    display: flex;
     flex: 1;
 }
 
 .side {
+    display: flex;
     flex: 0;
     width: 64px;
     min-width: 64px;
-    background: green;
+    transition: 0.3s ease all;
+}
+
+.sideopen {
+    width: 128px;
+    min-width: 128px;
 }
 
 .header,
 .footer {
-    flex: 0;
-    height: 64px;
-    min-height: 64px;
-    background: purple;
 }
 
 .footer {
+    display: flex;
+    flex: 0;
     height: 128px;
     min-height: 128px;
-    background: darkseagreen;
+    transition: 0.3s ease all;
+}
+.footeropen {
+    height: 256px;
+    min-height: 256px;
 }
