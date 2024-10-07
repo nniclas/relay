@@ -10,9 +10,11 @@ import {
 import { ChatRoom } from '../components/v1/chat-room'
 import { MessageList } from '../components/v2/message-list'
 import { Message } from '../types/message'
-import { ScrollLayout } from '../components/v2/layout/scroll-layout'
+import { ScrollLayout } from '../components/v2/layout/scroll-layout/scroll-layout'
 import styles from './main.module.css'
-import { Slider } from '../components/v2/layout/slider'
+import { Slider } from '../components/v2/layout/slider/slider'
+import { SplitLayout } from '../components/v2/layout/split-layout/split-layout'
+import { Layout } from './layout/layout'
 
 const you = 'tom.cook@example.com'
 
@@ -71,18 +73,40 @@ export const Main = () => {
         />
     )
 
+    const testFooter = <div style={{ height: 128, background: 'orange' }}></div>
+
+    const testSide = <div style={{ width: 64, background: 'red' }}></div>
+
     return (
-        <div
-            className={styles.container}
-            onClick={() => {
-                const i = Math.round(Math.random() * 9)
-                const msgs = [...messages, testMessages[i]]
-                setMessages(msgs)
-            }}
-        >
-            <ScrollLayout footer={userItems} followEnd>
-                <MessageList messages={messages} />
-            </ScrollLayout>
+        <Layout
+            header={<div />}
+            main={<div />}
+            side={<div />}
+            footer={<div />}
+        />
+    )
+
+    return (
+        <div className={styles.layout}>
+            <div style={{ height: 100, background: 'teal' }}>header</div>
+
+            {/* <SplitLayout side={testSide}>
+                <div style={{ flex: 1, background: 'blue' }}></div>
+            </SplitLayout> */}
+            <SplitLayout side={testSide}>
+                <div
+                    className={styles.container}
+                    onClick={() => {
+                        const i = Math.round(Math.random() * 9)
+                        const msgs = [...messages, testMessages[i]]
+                        setMessages(msgs)
+                    }}
+                >
+                    <ScrollLayout footer={testFooter} followEnd>
+                        <MessageList messages={messages} />
+                    </ScrollLayout>
+                </div>
+            </SplitLayout>
         </div>
     )
 }

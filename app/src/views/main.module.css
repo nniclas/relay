@@ -1,12 +1,17 @@
 .container {
     display: flex;
-    height: 100vh;
     background: linear-gradient(rgba(170, 175, 180, 1), rgba(120, 125, 130, 1));
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .useritem {
     /* width: 300px; */
-    width: 100vw;
+
     height: 64px;
     display: flex;
     justify-content: center;

@@ -3,7 +3,7 @@
     flex-direction: row;
     /* gap: 2px; */
     overflow-x: auto;
-    width: 100vw;
+    /* width: 100vw; */
     /* margin-bottom: 2px; */
 }
 

@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useRef } from 'react'
 import { useState } from 'react'
 import { Message } from '../../types/message'
 import { MessageItem } from './message-item'
-import { ScrollLayout } from './layout/scroll-layout'
+import { ScrollLayout } from './layout/scroll-layout/scroll-layout'
 
 interface MessageListArgs {
     // messages: Message[]
